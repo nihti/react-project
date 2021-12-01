@@ -15,11 +15,8 @@ export default function TrainingList(props) {
     const [open, setOpen] = useState(false);
     // polku JSON dataan
     // const trainigns = props.trainigns;
-
     // console.log(props.trainings.value+"/trainings");
-
     // Ei haluta hakea heti kaikkea dataa, vasta käyttäjän klikatessa 
-
     // https://customerrest.herokuapp.com/api/customers/81/trainings
     // https://customerrest.herokuapp.com/api/customers/81/trainings
     // 
@@ -63,6 +60,17 @@ export default function TrainingList(props) {
    // console.log("Treenit;")
    // console.log(trainings);
 
+   /**
+    * <BrowserRouter>                
+        <Link to={`/trainings${params.value.split("https://customerrest.herokuapp.com/api/customers/")[1]}`}>Trainings</Link>{' '}
+        <Switch>
+            <Route path={`/trainings${params.value.split("https://customerrest.herokuapp.com/api/customers/")[1]}`} >
+                <TrainingList trainings={params.value} />
+            </Route>
+        </Switch> 
+        </BrowserRouter>
+    * 
+    */
 
     return (
         <Fragment>
