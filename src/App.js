@@ -1,10 +1,10 @@
 import './App.css';
-import CustomersList from './components/CustomersList';
+import TopMenu from './components/TopMenu';
 
 export default function App() {
   return (
     <div className="App">
-      <CustomersList />
+        <TopMenu />
     </div>
   );
 }
