@@ -1,0 +1,9 @@
+site_name: pentest
+locale: fi
+theme: jekyll-theme-time-machine
+markdown: kramdown
+site_url: https://nihti.github.io/react-project/
+site_author: Niko Lehtiniemi
+site_description: Oppimispäiväkirja, React-lopputyö
+nav: 
+  - Index: 'index.md'
