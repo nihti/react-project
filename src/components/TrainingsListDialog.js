@@ -82,7 +82,7 @@ export default function TrainingsListDialog(props) {
                 <DialogTitle style={{textAlign: 'center' }}>Trainings of user id {id} </DialogTitle>
                 <a style={{textAlign: 'center' }} href="/customers">Back to customers list</a>
                 <DialogContent >
-                    <div className="ag-theme-alpine" style={{ height: 400, width: 600, margin: 'auto' }}>
+                    <div className="ag-theme-alpine" style={{ height: 400, width: '100%', margin: 'auto' }}>
                         <AgGridReact 
                             rowData={trainingsData}
                             columnDefs={columns}
