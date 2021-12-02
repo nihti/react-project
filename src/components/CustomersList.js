@@ -8,12 +8,12 @@ import TrainingList from './TrainingList';
 import { Button } from '@mui/material';
 import Test from './Test';
 import TrainingsListDialog from './TrainingsListDialog';
-// import { Switch } from '@mui/material';
-
+import Snackbar from '@mui/material/Snackbar';
+import AddCustomer from './AddCustomer';
 
 export default function CustomersList() {
     const [customers, setCustomers] = useState([]);
-
+    const [open, setOpen] = useState(false);
     /**
      * Effect Hook https://reactjs.org/docs/hooks-effect.html
      * 
@@ -41,8 +41,6 @@ export default function CustomersList() {
         filter: true,
         flex: 1
     }
-
-
 
     /** 
      * Varsinaiset sarakkeet, lista objekteja, käyttävät headerNamena fieldiään 
@@ -78,8 +76,26 @@ export default function CustomersList() {
         }
     ];
 
+    const addCustomer = (customer) => {
+        fetch('https://customerrest.herokuapp.com/api/customers', {
+            method: 'POST',
+            headers: { 'Content-type' : 'application/json' },
+            body: JSON.stringify(customer)
+        })
+        .then(resp => {
+            if (resp.ok) {
+                fetchData();
+                setOpen(true);
+            } else {
+                alert('jokin meni vikaan lisäyksessä')
+            }
+        })
+        .catch(err => console.error(err))
+    }
+
     return (
         <Fragment>
+            <AddCustomer addCustomer={ addCustomer } />
             <div className="ag-theme-alpine" style={{ height: 600, width: '80%', margin: 'auto', paddingTop: '80px'}}>
                 <AgGridReact 
                     rowData={customers}
@@ -88,6 +104,12 @@ export default function CustomersList() {
                     defaultColDef={defaultColDef}
                 />
             </div>
+            <Snackbar 
+                open={open}
+                autoHideDuration={3000}
+                onClose={() => setOpen(false)}
+                message="Customer added succesfully"
+            />
         </Fragment>
     );
 }
