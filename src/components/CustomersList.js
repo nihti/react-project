@@ -9,12 +9,13 @@ import { Button } from '@mui/material';
 import Test from './Test';
 // import TrainingsListDialog from './TrainingsListDialog';
 import Snackbar from '@mui/material/Snackbar';
-import AddCustomer from './AddCustomer';
+
 // import RemoveCustomer from './RemoveCustomer';
 import { defaultColDef } from './CustomerColumns';
 import TrainingsListDialog from './TrainingsListDialog';
 import RemoveCustomer from './RemoveCustomer';
-
+import AddCustomer from './AddCustomer';
+import EditCustomer from './EditCustomer';
 
 export default function CustomersList() {
     const [customers, setCustomers] = useState([]);
@@ -41,6 +42,7 @@ export default function CustomersList() {
         0: Object { firstname: "John", lastname: "Johnson", streetaddress: "5th Street", … }
      */
 
+    // Tämä pitää siirtää AddCustomeriin 
     const addCustomer = (customer) => {
         fetch('https://customerrest.herokuapp.com/api/customers', {
             method: 'POST',
@@ -57,7 +59,6 @@ export default function CustomersList() {
         })
         .catch(err => console.error(err))
     }
-
     
     /** 
      * Varsinaiset sarakkeet, lista objekteja, käyttävät headerNamena fieldiään 
@@ -101,6 +102,18 @@ export default function CustomersList() {
                 // fetchData funktio passataan viitteenä
                 // mutta sitä kutsutaan funktiona fetchData() Child komponentissa
                 <RemoveCustomer id={params.value} fetchData={fetchData} />
+            )
+        },
+        {  
+            headerName: 'Edit customer', 
+            field: 'links.0.href', 
+            sortable: false, 
+            filter: false, 
+            width: 120,
+            cellRendererFramework: params => (
+                // fetchData funktio passataan viitteenä
+                // mutta sitä kutsutaan funktiona fetchData() Child komponentissa
+                <EditCustomer id={params.value} fetchData={fetchData} />
             )
         },
     ];
