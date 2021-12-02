@@ -1,5 +1,7 @@
 import './App.css';
 import TopMenu from './components/TopMenu';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 /** 
  * Task1
  * Create pages to list customers and trainings
@@ -23,8 +25,10 @@ import TopMenu from './components/TopMenu';
  */
 export default function App() {
   return (
-    <div className="App">
-        <TopMenu />
-    </div>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <div className="App">
+          <TopMenu />
+      </div>
+    </LocalizationProvider>
   );
 }
