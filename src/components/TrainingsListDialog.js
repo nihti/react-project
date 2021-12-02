@@ -9,6 +9,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddTraining from './AddTraining';
+import RemoveTraining from './RemoveTraining';
 
 export default function TrainingsListDialog(props) {
     const [trainingsData, setTrainingsData] = useState([]);
@@ -50,10 +51,13 @@ export default function TrainingsListDialog(props) {
         { field: 'activity'     },
         { field: 'duration'     },
         { field: 'content'      },
-        { 
-            headerName: 'Link',
-            field: 'links.2.href' }
-        ,
+        {
+            headerName: 'Remove training',
+            field: 'link.2.href',
+            cellRendererFramework: url => (
+                <RemoveTraining url={url.data.links[0]} fetchTrainings={fetchTrainings} />
+            )
+        }
     ];
 
     return (
