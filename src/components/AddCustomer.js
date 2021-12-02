@@ -37,7 +37,7 @@ export default function AddCustomer(props) {
 
     return (
         <Fragment>
-            <Button onClick={ () => setOpen(true) }>Add customer</Button>
+            <Button onClick={ () => setOpen(true) } size="small">Add customer</Button>
             <Dialog open={open} onClose={ () => setOpen(false) }>
                 <DialogTitle>New customer</DialogTitle>
                 <DialogContent>

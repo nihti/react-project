@@ -7,9 +7,14 @@ import { BrowserRouter, Switch, Router, Routes, Route, Outlet, Link } from "reac
 import TrainingList from './TrainingList';
 import { Button } from '@mui/material';
 import Test from './Test';
-import TrainingsListDialog from './TrainingsListDialog';
+// import TrainingsListDialog from './TrainingsListDialog';
 import Snackbar from '@mui/material/Snackbar';
 import AddCustomer from './AddCustomer';
+// import RemoveCustomer from './RemoveCustomer';
+import { defaultColDef } from './CustomerColumns';
+import TrainingsListDialog from './TrainingsListDialog';
+import RemoveCustomer from './RemoveCustomer';
+
 
 export default function CustomersList() {
     const [customers, setCustomers] = useState([]);
@@ -24,6 +29,7 @@ export default function CustomersList() {
     useEffect(() => { fetchData() }, []);
 
     // Hae kaikki asiakkaat
+    // Tämä Services.js:ään täältä 
     const fetchData = () => {
         fetch('https://customerrest.herokuapp.com/api/customers')
         .then(res => res.json())
@@ -35,13 +41,24 @@ export default function CustomersList() {
         0: Object { firstname: "John", lastname: "Johnson", streetaddress: "5th Street", … }
      */
 
-    // Kaikille sarakkeille yhteiset arvot
-    const defaultColDef = {
-        sortable: true,
-        filter: true,
-        flex: 1
+    const addCustomer = (customer) => {
+        fetch('https://customerrest.herokuapp.com/api/customers', {
+            method: 'POST',
+            headers: { 'Content-type' : 'application/json' },
+            body: JSON.stringify(customer)
+        })
+        .then(resp => {
+            if (resp.ok) {
+                fetchData();
+                setOpen(true);
+            } else {
+                alert('jokin meni vikaan lisäyksessä')
+            }
+        })
+        .catch(err => console.error(err))
     }
 
+    
     /** 
      * Varsinaiset sarakkeet, lista objekteja, käyttävät headerNamena fieldiään 
      * Field = JSON data attribuutin nimi, esim content.firstname 
@@ -60,7 +77,7 @@ export default function CustomersList() {
          * https://www.ag-grid.com/react-data-grid/components/ 
          */
         { 
-            headerName: 'Trainings',
+            headerName: 'Show trainings',
             field: 'links.0.href',
             sortable: false,
             filter: false,
@@ -73,25 +90,20 @@ export default function CustomersList() {
             cellRendererFramework: params => (  
                 <TrainingsListDialog trainings={params} />
             )
-        }
+        }, 
+        {  
+            headerName: 'Remove customer', 
+            field: 'links.0.href', 
+            sortable: false, 
+            filter: false, 
+            width: 120,
+            cellRendererFramework: params => (
+                // fetchData funktio passataan viitteenä
+                // mutta sitä kutsutaan funktiona fetchData() Child komponentissa
+                <RemoveCustomer id={params.value} fetchData={fetchData} />
+            )
+        },
     ];
-
-    const addCustomer = (customer) => {
-        fetch('https://customerrest.herokuapp.com/api/customers', {
-            method: 'POST',
-            headers: { 'Content-type' : 'application/json' },
-            body: JSON.stringify(customer)
-        })
-        .then(resp => {
-            if (resp.ok) {
-                fetchData();
-                setOpen(true);
-            } else {
-                alert('jokin meni vikaan lisäyksessä')
-            }
-        })
-        .catch(err => console.error(err))
-    }
 
     return (
         <Fragment>
