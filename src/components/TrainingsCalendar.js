@@ -6,6 +6,7 @@ import { Snackbar, Button } from '@mui/material/';
 import { defaultColDef, dataFetcher } from './Services';
 import TrainingsListDialog from './TrainingsListDialog';
 import CustomerField from './CustomerField';
+import Calendar from './Calendar';
 
 export default function TrainingsCalendar() {
     const [trainings, setTrainings] = useState([]);
@@ -30,6 +31,7 @@ export default function TrainingsCalendar() {
     return (
         <Fragment>
             <h1>Trainigns Calendar</h1>
+            <Calendar />
             <div className="ag-theme-alpine" style={{ height: 600, width: '80%', margin: 'auto', paddingTop: '80px'}}>
                 <AgGridReact 
                     rowData={trainings}
