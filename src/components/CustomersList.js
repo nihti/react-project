@@ -21,10 +21,12 @@ export default function CustomersList() {
      * efektin laukaisemiseksi komponentin rendatessa ensimmäisen kerran
      */
     useEffect(() => { dataFetcher(customersUrl, setCustomers) }, []);
-    /** 
-     * Varsinaiset sarakkeet, lista objekteja, käyttävät headerNamena fieldiään 
-     * Field = JSON data attribuutin nimi, esim content.firstname 
-     * */ 
+
+    /**  
+     * Jatkaa customer.js:stä importattua listaa, 
+     * nämä kaksi saraketta [remove, edit] 
+     * jätetty tänne koska tarvitsevat setCustomers propsin dataFetcher custom funktiolle
+     */
     const columns = [...customerColumns,
         {  
             headerName: 'Remove customer', 
@@ -33,8 +35,6 @@ export default function CustomersList() {
             filter: false, 
             width: 120,
             cellRendererFramework: params => (
-                // fetchData funktio passataan viitteenä
-                // mutta sitä kutsutaan funktiona fetchData() Child komponentissa
                 <RemoveCustomer id={params.value} setCustomers={setCustomers} />
             )
         },
@@ -45,8 +45,6 @@ export default function CustomersList() {
             filter: false, 
             width: 120,
             cellRendererFramework: params => (
-                // fetchData funktio passataan viitteenä
-                // mutta sitä kutsutaan funktiona fetchData() Child komponentissa
                 <EditCustomer id={params.value} setCustomers={setCustomers} />
             )
         },
@@ -55,7 +53,6 @@ export default function CustomersList() {
     // AgGridReact-komponentin attribuutille onGridReady luotu funktio 
     const onGridReady = (p) => {
         setGridApi(p.api);
-        console.log(p.api);
     };
 
     const onBtnExport = () => {
