@@ -5,6 +5,8 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import { customersUrl } from './customer';
+import { dataFetcher } from '../Services';
 
 /**
  * Add a new customerYou can add new customer by calling /customers endpoint 
@@ -26,13 +28,30 @@ export default function AddCustomer(props) {
         city: ''
     });
 
-    const handleSave = () => {
-        props.addCustomer(customer);
-        setOpen(false);
-    }
-
     const inputChanged = (e) => {
         setCustomer({ ...customer, [e.target.name]: e.target.value })
+    }
+
+    const addCustomer = () => {
+        fetch(customersUrl, {
+            method: 'POST',
+            headers: { 'Content-type' : 'application/json' },
+            body: JSON.stringify(customer)
+        })
+        .then(resp => {
+            if (resp.ok) {
+                dataFetcher(customersUrl, props.setCustomers);
+                alert('Asiakas lisätty onnistuneesti')
+            } else {
+                alert('jokin meni vikaan lisäyksessä')
+            }
+        })
+        .catch(err => console.error(err))
+    }
+
+    const handleSave = () => {
+        addCustomer();
+        setOpen(false);
     }
 
     return (

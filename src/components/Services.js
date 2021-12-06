@@ -1,7 +1,13 @@
-// Hae kaikki asiakkaat
-const fetchData = () => {
-    fetch('https://customerrest.herokuapp.com/api/customers')
+// Kaikille sarakkeille yhteiset arvot
+export const defaultColDef = {
+    sortable: true,
+    filter: true,
+    flex: 1
+}
+
+export const dataFetcher = (url, setter) => {
+    fetch(url)
     .then(res => res.json())
-    .then(data => { setCustomers(data.content)} )
+    .then(data => { setter(data.content)} )
     .catch(err => console.error(err))
 }

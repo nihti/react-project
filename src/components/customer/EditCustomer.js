@@ -1,11 +1,13 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-
+import { dataFetcher } from '../Services';
+import { customersUrl } from './customer';
+ 
 export default function EditUser(props) {
     // Dialogin state
     const [open, setOpen] = useState(false);
@@ -58,8 +60,7 @@ export default function EditUser(props) {
         })
         .then(res => {
             if (res.ok) {
-                // Propsina passattu koko asiakaslistan datan hakeminen
-                props.fetchData()
+                dataFetcher(customersUrl, props.setCustomers); 
                 alert('Customer edited successfully')
             } else {
                 alert('Something went wrong')
