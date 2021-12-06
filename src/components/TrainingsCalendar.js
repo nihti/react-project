@@ -3,26 +3,28 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Snackbar, Button } from '@mui/material/';
-import { defaultColDef } from './Services';
+import { defaultColDef, dataFetcher } from './Services';
 import TrainingsListDialog from './TrainingsListDialog';
+import CustomerField from './CustomerField';
 
 export default function TrainingsCalendar() {
     const [trainings, setTrainings] = useState([]);
-    
-    const fetchData = () => {
-        fetch('https://customerrest.herokuapp.com/api/trainings')
-        .then(res => res.json())
-        .then(data => { setTrainings(data.content)} )
-        .catch(err => console.error(err))
-    }
+    const url = 'https://customerrest.herokuapp.com/api/trainings';
 
-
+    useEffect(() => { dataFetcher(url, setTrainings) }, []);
 
     const columns = [
-        { field: 'date',       },
+        { field: 'date'             },
         { field: 'duration'         }, 
-        { field: 'activity'    },
-        { field: 'content'         }
+        { field: 'activity'         },
+        { field: 'content'          },
+        {
+            headerName: 'Customer',
+            field: 'links.2.href',
+            cellRendererFramework: p => (
+                <CustomerField params={p.value} />
+            )
+        }
     ]
 
     return (

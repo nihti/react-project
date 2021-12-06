@@ -6,6 +6,7 @@ import TrainingsCalendar from './TrainingsCalendar';
 
 export default function TopMenu() {
     return (
+            // https://ui.dev/react-router-v5-pass-props-to-components 
             <BrowserRouter>
                 <Link to="/">Home</Link>{' '}
                 <Link to="/customers"> Customers</Link>{' '}

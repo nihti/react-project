@@ -4,7 +4,14 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Snackbar, Button } from '@mui/material/';
 import { defaultColDef, dataFetcher } from './Services';
-import { AddCustomer, EditCustomer, RemoveCustomer, customersUrl, customerColumns } from './customer/customer';
+import { 
+    AddCustomer, 
+    EditCustomer, 
+    RemoveCustomer, 
+    customersUrl, 
+    customerColumns,
+    
+ } from './customer/customer';
 
 export default function CustomersList() {
     const [customers, setCustomers] = useState([]);
@@ -67,7 +74,6 @@ export default function CustomersList() {
                 <AgGridReact 
                     rowData={customers}
                     columnDefs={columns}
-                    // Kaikille sarakkeille yhteiset arvot
                     defaultColDef={defaultColDef}
                     onGridReady={onGridReady}
                 />
