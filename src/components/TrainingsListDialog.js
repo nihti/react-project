@@ -14,6 +14,7 @@ import RemoveTraining from './RemoveTraining';
 export default function TrainingsListDialog(props) {
     const [trainingsData, setTrainingsData] = useState([]);
     const [open, setOpen] = useState(false);
+    
     const customer = props.trainings.value;
     // Käyttäjäid
     const id = customer.split("https://customerrest.herokuapp.com/api/customers/")[1];

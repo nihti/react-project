@@ -31,14 +31,7 @@ export default function TrainingsCalendar() {
     return (
         <Fragment>
             <h1>Trainigns Calendar</h1>
-            <Calendar />
-            <div className="ag-theme-alpine" style={{ height: 600, width: '80%', margin: 'auto', paddingTop: '80px'}}>
-                <AgGridReact 
-                    rowData={trainings}
-                    columnDefs={columns}
-                    defaultColDef={defaultColDef}
-                />
-            </div>
+            <Calendar trainings={trainings}  />
         </Fragment>
     );
 }
