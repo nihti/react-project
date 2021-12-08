@@ -17,11 +17,10 @@ export default function Calendar(props) {
      * links: Array(3) [ {…}, {…}, {…} ]
      * <prototype>: Object { … }
      */
-    const [trainings, setTrainings] = useState([
- 
-    ]);
+    // const [trainings, setTrainings] = useState([]);
     // array
-    const data = props.trainings;
+    // const data = props.trainings;
+
     // const helper = [];
     /** 
      * props.trainings on Array objekteja
@@ -60,7 +59,7 @@ export default function Calendar(props) {
             plugins={[ dayGridPlugin ]}
             initialView="dayGridMonth"
             events={// jos tänne antaa listan propsina toimii mutta ei statena 
-                data
+                props.trainings
             }
         />
     )

@@ -1,19 +1,47 @@
-import React, { useEffect, useState, Fragment } from 'react';
-import { AgGridReact } from 'ag-grid-react';
+import React, { componentDidUpdate, useEffect, useState, Fragment } from 'react';
+import FullCalendar from '@fullcalendar/react' // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { Snackbar, Button } from '@mui/material/';
-import { defaultColDef, dataFetcher } from './Services';
-import TrainingsListDialog from './TrainingsListDialog';
-import CustomerField from './CustomerField';
-import Calendar from './Calendar';
+import { linkClasses } from '@mui/material/Link';
+import { dataFetcher } from './Services';
 
 export default function TrainingsCalendar() {
+
+    /*
+    Haetaan arvot ja asetetaan ne stateen halutussa muodossa 
+    ja asetetaan state komponentille
+    */
+    
     const [trainings, setTrainings] = useState([]);
+    const [events, setEvents] = useState([]);
     const url = 'https://customerrest.herokuapp.com/api/trainings';
 
+    /** 
+     * Paras vaihtoehto olisi asettaa data oikeassa muodossa heti stateen
+     * mutta se ei onnistunut
+     */
     useEffect(() => { dataFetcher(url, setTrainings) }, []);
+    
+    return (
+        <FullCalendar
+            plugins={[ dayGridPlugin ]}
+            initialView="dayGridMonth"
+            events={trainings}
+        />
+    );
+    /*
+    setEvents(
+        trainings.map((e, i) => {
+            [...events, {
+                id: i,
+                title: e.activity,
+                date: e.date
+            }]
+        })
+    );*/
 
+    /*
     const columns = [
         { field: 'date'             },
         { field: 'duration'         }, 
@@ -26,12 +54,8 @@ export default function TrainingsCalendar() {
                 <CustomerField params={p.value} />
             )
         }
-    ]
+    ];
+    */
 
-    return (
-        <Fragment>
-            <h1>Trainigns Calendar</h1>
-            <Calendar trainings={trainings}  />
-        </Fragment>
-    );
+
 }
