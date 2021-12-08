@@ -22,15 +22,8 @@ export default function TrainingsCalendar() {
      * mutta se ei onnistunut
      */
     useEffect(() => { dataFetcher(url, setTrainings) }, []);
-    
-    return (
-        <FullCalendar
-            plugins={[ dayGridPlugin ]}
-            initialView="dayGridMonth"
-            events={trainings}
-        />
-    );
-    /*
+    console.log(trainings)
+/*
     setEvents(
         trainings.map((e, i) => {
             [...events, {
@@ -39,7 +32,16 @@ export default function TrainingsCalendar() {
                 date: e.date
             }]
         })
-    );*/
+    );
+*/
+    return (
+        <FullCalendar
+            plugins={[ dayGridPlugin ]}
+            initialView="dayGridMonth"
+            events={trainings}
+        />
+    );
+    
 
     /*
     const columns = [

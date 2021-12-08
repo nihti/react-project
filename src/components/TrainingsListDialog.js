@@ -10,11 +10,12 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddTraining from './AddTraining';
 import RemoveTraining from './RemoveTraining';
+import TrainingsChart from './TrainingsChart';
 
 export default function TrainingsListDialog(props) {
     const [trainingsData, setTrainingsData] = useState([]);
     const [open, setOpen] = useState(false);
-    
+
     const customer = props.trainings.value;
     // Käyttäjäid
     const id = customer.split("https://customerrest.herokuapp.com/api/customers/")[1];
@@ -29,16 +30,16 @@ export default function TrainingsListDialog(props) {
     }
 
     const fetchTrainings = () => {
-        const url = customer+"/trainings";
+        const url = customer + "/trainings";
         fetch(url)
-        .then(res => res.json())
-        .then(data => { setTrainingsData(data.content); console.log(data.content) })
-        .catch(err => console.error(err))
+            .then(res => res.json())
+            .then(data => { setTrainingsData(data.content); console.log(data.content) })
+            .catch(err => console.error(err))
         if (trainingsData) {
             console.log(id);
             console.log(trainingsData);
         }
-        
+
     }
 
     const defaultColDef = {
@@ -48,10 +49,10 @@ export default function TrainingsListDialog(props) {
     }
 
     const columns = [
-        { field: 'date'         },
-        { field: 'activity'     },
-        { field: 'duration'     },
-        { field: 'content'      },
+        { field: 'date' },
+        { field: 'activity' },
+        { field: 'duration' },
+        { field: 'content' },
         {
             headerName: 'Remove training',
             field: 'link.2.href',
@@ -63,22 +64,23 @@ export default function TrainingsListDialog(props) {
 
     return (
         <Fragment>
-            <Button onClick={getTrainings}>Trainings</Button>
-            <Dialog open={open} onClose={closeDialog} fullScreen >
-                <DialogTitle style={{textAlign: 'center' }}>Trainings of user id {id} </DialogTitle>
-                <a style={{textAlign: 'center' }} href="/customers">Back to customers list</a>
-                <AddTraining customer={customer} fetchTrainings={fetchTrainings} />
+            <Button onClick={ getTrainings }>Trainings</Button>
+            <Dialog open={open} onClose={ closeDialog } fullScreen >
+                <DialogTitle style={{ textAlign: 'center' }}>Trainings of user id {id} </DialogTitle>
+                <a style={{ textAlign: 'center' }} href="/customers">Back to customers list</a>
+                <AddTraining customer={ customer } fetchTrainings={ fetchTrainings } />
                 <DialogContent >
                     <div className="ag-theme-alpine" style={{ height: 400, width: '100%', margin: 'auto' }}>
-                        <AgGridReact 
-                            rowData={trainingsData}
-                            columnDefs={columns}
-                            defaultColDef={defaultColDef}
+                        <AgGridReact
+                            rowData={ trainingsData }
+                            columnDefs={ columns }
+                            defaultColDef={ defaultColDef }
                         />
-                    </div>
+                    </div>                
+                    <TrainingsChart data={ trainingsData } />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={closeDialog}></Button>
+                    <Button onClick={ closeDialog }></Button>
                 </DialogActions>
             </Dialog>
         </Fragment>
