@@ -9,13 +9,13 @@ export const customersUrl = 'https://customerrest.herokuapp.com/api/customers';
  * Field = JSON data attribuutin nimi, esim content.firstname 
  * */ 
 export const customerColumns = [
-    { field: 'firstname',       },
-    { field: 'lastname'         }, 
-    { field: 'streetaddress'    },
-    { field: 'postcode'         },
-    { field: 'city'             },
-    { field: 'email'            },
-    { field: 'phone'            },
+    { field: 'firstname'                },
+    { field: 'lastname'                 }, 
+    { field: 'streetaddress'            },
+    { field: 'postcode'                 },
+    { field: 'city'                     },
+    { field: 'email'                    },
+    { field: 'phone'                    },
     { 
         headerName: 'Show trainings',
         field: 'links.0.href',

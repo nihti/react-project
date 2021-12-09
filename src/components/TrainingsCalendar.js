@@ -14,7 +14,7 @@ export default function TrainingsCalendar() {
     */
     
     const [trainings, setTrainings] = useState([]);
-    const [events, setEvents] = useState([]);
+    let events = [];
     const url = 'https://customerrest.herokuapp.com/api/trainings';
 
     /** 
@@ -22,23 +22,23 @@ export default function TrainingsCalendar() {
      * mutta se ei onnistunut
      */
     useEffect(() => { dataFetcher(url, setTrainings) }, []);
-    console.log(trainings)
-/*
-    setEvents(
-        trainings.map((e, i) => {
-            [...events, {
-                id: i,
-                title: e.activity,
-                date: e.date
-            }]
+    // console.log(trainings)
+
+    // Avaimet voittoon: scopen asettaminen () ja listan rajaaminen vain [...events]  
+    events = trainings.map((train, i) => (
+        [...events], {
+            id: i,
+            title: train.activity,
+            start: train.date
         })
     );
-*/
+        
     return (
         <FullCalendar
             plugins={[ dayGridPlugin ]}
             initialView="dayGridMonth"
-            events={trainings}
+            // inlinenä eventsiin 
+            events={ events }
         />
     );
     

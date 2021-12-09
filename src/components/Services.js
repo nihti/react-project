@@ -5,3 +5,17 @@ export const dataFetcher = (url, setter) => {
     .then(data => { setter(data.content)} )
     .catch(err => console.error(err))
 }
+// reset the app data 
+export const reset = () => {
+    fetch('http://customerrest.herokuapp.com/reset', {
+      method: 'POST'
+    })
+    .then(resp => {
+      if (resp.ok) {
+        alert('Kanta nollattu');
+      } else {
+        alert('Jokin meni vikaan')
+      }
+    })
+    .catch(err => console.error(err));
+  }

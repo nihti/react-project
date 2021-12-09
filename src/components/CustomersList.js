@@ -21,6 +21,20 @@ export default function CustomersList() {
      * https://www.ag-grid.com/react-data-grid/csv-export/#example-csv-export 
      */
     const [gridApi, setGridApi] = useState(null);
+
+    // AgGridReact-komponentin attribuutille onGridReady luotu funktio 
+    const onGridReady = (p) => {
+        setGridApi(p.api);
+    };
+
+    const onBtnExport = () => {
+        const params = {
+            // Kuinka skipata sarakkeita: https://pretagteam.com/question/aggrid-skip-column-on-export-to-csv 
+            // columnKeys käyttää colId:tä joka defaulttaa field-attribuuttiin uupuessaan: https://www.ag-grid.com/javascript-data-grid/column-properties/
+            columnKeys: ['firstname', 'lastname', 'streetaddress', 'postcode', 'city', 'email', 'phone']
+        }
+        gridApi.exportDataAsCsv(params);
+    };
     /**
      * Effect Hook https://reactjs.org/docs/hooks-effect.html
      * fetchData-funktio ensimmäisenä ja 
@@ -57,19 +71,12 @@ export default function CustomersList() {
         },
     ];
 
-    // AgGridReact-komponentin attribuutille onGridReady luotu funktio 
-    const onGridReady = (p) => {
-        setGridApi(p.api);
-    };
 
-    const onBtnExport = () => {
-        gridApi.exportDataAsCsv();
-    };
 
     return (
         <Fragment>
             <AddCustomer setCustomers={setCustomers} />
-            <Button onClick={() => onBtnExport()}> CSV </Button>
+            <Button onClick={() => onBtnExport()} size='small'> CSV customers</Button>
             <div className="ag-theme-alpine" style={{ height: 600, width: '80%', margin: 'auto', paddingTop: '80px'}}>
                 <AgGridReact 
                     rowData={customers}

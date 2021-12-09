@@ -65,7 +65,7 @@ export default function TrainingsListDialog(props) {
     return (
         <Fragment>
             <Button onClick={ getTrainings }>Trainings</Button>
-            <Dialog open={open} onClose={ closeDialog } fullScreen >
+            <Dialog open={open} onClose={ closeDialog } fullWidth >
                 <DialogTitle style={{ textAlign: 'center' }}>Trainings of user id {id} </DialogTitle>
                 <a style={{ textAlign: 'center' }} href="/customers">Back to customers list</a>
                 <AddTraining customer={ customer } fetchTrainings={ fetchTrainings } />
