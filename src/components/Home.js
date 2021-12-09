@@ -28,8 +28,9 @@ export default function Home() {
                 <p>.</p>
                 <p>.</p>
                 <p>.</p>
-                <Button onClick={reset} color="error"> RESET THE EXERCISE </Button>
                 <p>(resets the customer & training info - doesn't do anything to the background animation)</p>
+
+                <Button onClick={reset} color="error"> RESET THE EXERCISE </Button>
             </div>
         </Fragment>
     )

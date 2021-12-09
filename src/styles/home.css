@@ -37,7 +37,7 @@
     z-index: 3;
   }
   h1:hover, h3:hover, p:hover, button:hover {
-    transform: translate3d(0, -10px, 22px);
+    transform: translate3d(0, 0px, 22px);
     color: #ff0266;
   }
 
@@ -47,7 +47,12 @@
 
   h1, h3, p, button {
     transition: all 0.3s ease !important;
+    
   } 
+
+  .home h1, h3, p, button {
+    background: darkslategray;
+  }
 
   p, button {
     z-index: 10;
