@@ -8,7 +8,6 @@ export default function ParticlesDemo() {
     // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
   };
 
-
   const particlesLoaded = (container) => {
     // console.log(container);
   };

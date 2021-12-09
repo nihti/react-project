@@ -23,8 +23,8 @@ export default function TrainingsCalendar() {
     useEffect(() => { dataFetcher(url, setTrainings) }, []);
 
     // Avaimet voittoon: scopen asettaminen () ja listan rajaaminen vain [...events]  
-    events = trainings.map((train, i) => (
-        [...events], {
+    events = trainings.map((train, i) => 
+        ([...events], {
             id: i,
             title: train.activity,
             /** 
