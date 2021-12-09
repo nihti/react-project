@@ -1,11 +1,10 @@
 import Button from '@mui/material/Button';
-import { dataFetcher } from '../Services';
+import { dataFetcher } from '../../services/services';
 import { customersUrl } from './customer';
 
 export default function RemoveUser(props) {
     // Käyttäjän yksilöivä url
     const url = props.id;
-    // Kaikkien käyttäjien url
     const removeUser = (url) => {
         if (window.confirm('Are you sure?')) {
             fetch(url, {method: 'DELETE'})

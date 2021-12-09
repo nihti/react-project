@@ -6,7 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { customersUrl } from './customer';
-import { dataFetcher } from '../Services';
+import { dataFetcher } from '../../services/services';
 
 /**
  * Add a new customerYou can add new customer by calling /customers endpoint 

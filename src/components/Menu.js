@@ -1,10 +1,9 @@
 import { Fragment } from 'react';
-import CustomersList from './CustomersList';
-import { BrowserRouter, Switch, Router, Routes, Route, Outlet, Link } from "react-router-dom";
-import TrainingsCalendar from './TrainingsCalendar';
+import CustomersList from './customer/CustomersList';
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import TrainingsCalendar from './training/TrainingsCalendar';
 import Home from './Home';
 import ParticlesDemo from './ParticlesDemo';
-import { Button } from '@mui/material';
 import '../styles/home.css';
 
 

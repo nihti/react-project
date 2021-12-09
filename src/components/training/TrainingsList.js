@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Fragment } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -12,7 +12,7 @@ import AddTraining from './AddTraining';
 import RemoveTraining from './RemoveTraining';
 import TrainingsChart from './TrainingsChart';
 
-export default function TrainingsListDialog(props) {
+export default function TrainingsList(props) {
     const [trainingsData, setTrainingsData] = useState([]);
     const [open, setOpen] = useState(false);
 
@@ -39,7 +39,6 @@ export default function TrainingsListDialog(props) {
             console.log(id);
             console.log(trainingsData);
         }
-
     }
 
     const defaultColDef = {
@@ -64,8 +63,8 @@ export default function TrainingsListDialog(props) {
 
     return (
         <Fragment>
-            <Button onClick={ getTrainings }>Trainings</Button>
-            <Dialog open={open} onClose={ closeDialog } fullWidth >
+            <Button onClick={ getTrainings } size='small'>Trainings</Button>
+            <Dialog open={open} onClose={ closeDialog } fullScreen >
                 <DialogTitle style={{ textAlign: 'center' }}>Trainings of user id {id} </DialogTitle>
                 <a style={{ textAlign: 'center' }} href="/customers">Back to customers list</a>
                 <AddTraining customer={ customer } fetchTrainings={ fetchTrainings } />

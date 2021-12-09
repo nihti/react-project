@@ -3,7 +3,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Snackbar, Button } from '@mui/material/';
-import { defaultColDef, dataFetcher } from './Services';
+import { defaultColDef, dataFetcher } from '../../services/services';
 import { 
     AddCustomer, 
     EditCustomer, 
@@ -11,7 +11,7 @@ import {
     customersUrl, 
     customerColumns,
     
- } from './customer/customer';
+ } from './customer';
 
 export default function CustomersList() {
     const [customers, setCustomers] = useState([]);
@@ -70,8 +70,6 @@ export default function CustomersList() {
             )
         },
     ];
-
-
 
     return (
         <Fragment>

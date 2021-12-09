@@ -5,7 +5,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { dataFetcher } from '../Services';
+import { dataFetcher } from '../../services/services';
 import { customersUrl } from './customer';
  
 export default function EditUser(props) {

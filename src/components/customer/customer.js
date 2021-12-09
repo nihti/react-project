@@ -1,4 +1,4 @@
-import TrainingsListDialog from '../TrainingsListDialog';
+import TrainingsList from '../training/TrainingsList';
 // Yksittäisten komponenttien sijasta voidaan importata kaikki yhdestä tiedostosta
 export { default as AddCustomer } from './AddCustomer';
 export { default as EditCustomer } from './EditCustomer';
@@ -22,7 +22,7 @@ export const customerColumns = [
         sortable: false,
         filter: false,
         cellRendererFramework: params => (  
-            <TrainingsListDialog trainings={params} />
+            <TrainingsList trainings={params} />
         )
     }
 ];

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Fragment } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -28,7 +28,6 @@ export default function AddTraining(props) {
     const handleSave = () => {
         const date = moment().toISOString(training.date);
         setTraining({ ...training, date: date });
-        // console.log(date);
         addTraining();
         close();
     }
