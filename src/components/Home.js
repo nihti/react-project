@@ -2,6 +2,8 @@ import '../styles/home.css';
 import { Fragment } from 'react';
 import { reset } from '../services/services';
 import { Button } from '@mui/material';
+import ParticlesDemo from './ParticlesDemo';
+import '../styles/home.css';
 // import Particles from 'react-tsparticles';
 
 /**  
@@ -11,6 +13,7 @@ import { Button } from '@mui/material';
 export default function Home() {
     return (
         <Fragment>
+            <ParticlesDemo />
             <div className='home'>
                 <p>.</p>
                 <p>.</p>

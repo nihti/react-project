@@ -68,6 +68,7 @@ export default function TrainingsList(props) {
                 <DialogTitle style={{ textAlign: 'center' }}>Trainings of user id {id} </DialogTitle>
                 <a style={{ textAlign: 'center' }} href="/customers">Back to customers list</a>
                 <AddTraining customer={ customer } fetchTrainings={ fetchTrainings } />
+                <TrainingsChart data={ trainingsData } />
                 <DialogContent >
                     <div className="ag-theme-alpine" style={{ height: 400, width: '100%', margin: 'auto' }}>
                         <AgGridReact
@@ -75,8 +76,7 @@ export default function TrainingsList(props) {
                             columnDefs={ columns }
                             defaultColDef={ defaultColDef }
                         />
-                    </div>                
-                    <TrainingsChart data={ trainingsData } />
+                    </div>                  
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={ closeDialog }></Button>

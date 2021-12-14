@@ -1,38 +1,39 @@
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 import CustomersList from './customer/CustomersList';
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import TrainingsCalendar from './training/TrainingsCalendar';
 import Home from './Home';
-import ParticlesDemo from './ParticlesDemo';
-import '../styles/home.css';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
 
 
 export default function Menu() {
-
+    const [value, setValue] = React.useState(0);
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
     return (
         /* https://ui.dev/react-router-v5-pass-props-to-components  */
-        <Fragment>
-            <ParticlesDemo />
-            <div>
-            <BrowserRouter >
-                <div className='menu-container'>
-                    <Link className='slider2' to="/"  > Home</Link>{' '}
-                    <Link className='slider2' to="/customers" > Customers</Link>{' '}
-                    <Link className='slider2' to="/trainings" > Calendar</Link>{' '}
-                </div>
-                <Switch>
-                    <Route exact path="/" >
-                        <Home />
-                    </Route>
-                    <Route exact path="/customers" >
-                        <CustomersList />
-                    </Route>
-                    <Route exact path="/trainings">
-                        <TrainingsCalendar />
-                    </Route>
-                </Switch>
-            </BrowserRouter>
-            </div>
-        </Fragment>
+        <BrowserRouter >
+            <Box sx={{ width: '100%' }}>
+                <Tabs value={value} onChange={handleChange} centered>
+                    <Tab style={{color: '#fff'}} label="Home" component={Link} to="/" />
+                    <Tab style={{color: '#fff'}} label="Customers" component={Link} to="/customers" />
+                    <Tab style={{color: '#fff'}} label="Calendar" component={Link} to="/trainings" />
+                </Tabs>
+            </Box>
+            <Switch>
+                <Route exact path="/" >
+                    <Home />
+                </Route>
+                <Route exact path="/customers" >
+                    <CustomersList />
+                </Route>
+                <Route exact path="/trainings">
+                    <TrainingsCalendar />
+                </Route>
+            </Switch>
+        </BrowserRouter>
     )
 }

@@ -23,23 +23,26 @@ export default function TrainingsCalendar() {
     useEffect(() => { dataFetcher(url, setTrainings) }, []);
 
     // Avaimet voittoon: scopen asettaminen () ja listan rajaaminen vain [...events]  
-    events = trainings.map((train, i) => 
-        ([...events], {
-            id: i,
-            title: train.activity,
-            /** 
-             * Tämän vastauksen pohjalta onnistunut format: 
-             * https://stackoverflow.com/questions/39735724/how-to-parse-iso-8601-into-date-and-time-format-using-moment-js-in-javascript/39736368#39736368
-             */
-            start: moment(train.date).utc().format('YYYY-MM-DDTHH:mm:ss')
-        })
+    events = trainings.map((train, i) =>
+    ([...events], {
+        id: i,
+        title: train.activity,
+        /** 
+         * Tämän vastauksen pohjalta onnistunut format: 
+         * https://stackoverflow.com/questions/39735724/how-to-parse-iso-8601-into-date-and-time-format-using-moment-js-in-javascript/39736368#39736368
+         */
+        start: moment(train.date).utc().format('YYYY-MM-DDTHH:mm:ss')
+    })
     );
-        
+
     return (
-        <FullCalendar
-            plugins={[ dayGridPlugin ]}
-            initialView="dayGridMonth"
-            events={ events }
-        />
+        <div className='calendar-container' style={{ paddingTop: '110px' }}>
+            <FullCalendar
+                plugins={[dayGridPlugin]}
+                initialView="dayGridMonth"
+                events={events}
+                height="auto"
+            />
+        </div>
     );
 }

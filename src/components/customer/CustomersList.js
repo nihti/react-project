@@ -75,12 +75,13 @@ export default function CustomersList() {
         <Fragment>
             <AddCustomer setCustomers={setCustomers} />
             <Button onClick={() => onBtnExport()} size='small'> CSV customers</Button>
-            <div className="ag-theme-alpine" style={{ height: 600, width: '80%', margin: 'auto', paddingTop: '80px'}}>
+            <div className="ag-theme-alpine" style={{ height: 600, width: '100%', margin: 'auto', paddingTop: '80px'}}>
                 <AgGridReact 
                     rowData={customers}
                     columnDefs={columns}
                     defaultColDef={defaultColDef}
                     onGridReady={onGridReady}
+                    domLayout='autoHeight'
                 />
             </div>
             <Snackbar 
