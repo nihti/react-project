@@ -15,15 +15,18 @@ export default function TrainingsCalendar() {
      * ja asetetaan state komponentille
      */
     const [trainings, setTrainings] = useState([]);
-    const [customer, setCustomer] = useState();
+    // const [customer, setCustomer] = useState();
     let events = [];
     const url = 'https://customerrest.herokuapp.com/api/trainings';
+
+    console.log(trainings);
 
     /** 
      * Paras vaihtoehto olisi asettaa data oikeassa muodossa heti stateen
      * mutta se ei onnistunut
      */
     useEffect(() => { dataFetcher(url, setTrainings) }, []);
+
 
     // Avaimet voittoon: scopen asettaminen () ja listan rajaaminen vain [...events]  
     events = trainings.map((train) => 
@@ -44,16 +47,17 @@ export default function TrainingsCalendar() {
     );
 
     const eventClick = (info) => {
-        dataFetcher(info.event._def.extendedProps.customer, setCustomer)
+        // dataFetcher(info.event._def.extendedProps.customer, setCustomer);
+        console.log(info);
         fetch(info.event._def.extendedProps.customer)
         .then(res => res.json())
-        .then(data => setCustomer(data))
-        .catch(err => console.log(err))
-        if (customer) {
-            const fn = customer.firstname;
-            const ln = customer.lastname;
-            alert(fn + " " + ln + ", duration: " +info.event._def.extendedProps.duration + " min");
-        }
+        .then(data => { 
+            const msg = 'customer: ' + data.firstname + ' ' +data.lastname + ', duration: ' +info.event._def.extendedProps.duration +' min';
+            const add = info.event._def.title;
+            alert(msg + '(' + add + ')') 
+        })
+        .catch(err => console.error(err))
+
     }
 
     return (

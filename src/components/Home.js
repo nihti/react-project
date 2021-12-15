@@ -1,10 +1,7 @@
-//import '../styles/home.css';
 import { Fragment } from 'react';
 import { reset } from '../services/services';
 import { Button } from '@mui/material';
 import ParticlesDemo from './ParticlesDemo';
-//import '../styles/home.css';
-// import Particles from 'react-tsparticles';
 
 /**  
  * React Particles.js: https://github.com/matteobruni/tsparticles/tree/main/components/react 
