@@ -1,25 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import Menu from './components/Menu';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
-function App() {
+/**
+ * Add Export functionality, that user can export all customers to a CSV file
+ * Add calendar page where personal trainer can see all trainings (monthly, weekly, daily). See example screenshot.
+ * Deploy your app to some cloud server
+ */
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <div className="App">
+        <Menu />
+      </div>
+    </LocalizationProvider>
   );
 }
-
-export default App;
