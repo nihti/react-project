@@ -47,7 +47,6 @@ export default function EditUser(props) {
     
     // Lähetetään muokattu data bäkkäriin 
     const handleSave = () => {
-        // console.log(customer);
         updateCustomer();
     }
 

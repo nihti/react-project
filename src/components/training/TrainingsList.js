@@ -11,53 +11,32 @@ import DialogTitle from '@mui/material/DialogTitle';
 import AddTraining from './AddTraining';
 import RemoveTraining from './RemoveTraining';
 import TrainingsChart from './TrainingsChart';
-import { dataFetcher } from '../../services/services';
+import { dataFetcher, defaultColDef } from '../../services/services';
 
 export default function TrainingsList(props) {
+    /** Statet */
     const [trainingsData, setTrainingsData] = useState([]);
     const [open, setOpen] = useState(false);
-    // const [name, setName] = useState();
 
-    // useEffect(() => { dataFetcher(customer, setName) }, []);
-
-    console.log(props)
-
+    /** Muuttujat */
     const fn = props.trainings.data.firstname;
     const ln = props.trainings.data.lastname;
-
     const customer = props.trainings.value;
-    // Käyttäjäid
-    const id = customer.split("https://customerrest.herokuapp.com/api/customers/")[1];
 
+    /** Metodit */
     const getTrainings = () => {
         fetchTrainings();
         setOpen(true);
     }
-
     const closeDialog = () => {
         setOpen(false);
     }
-
     const fetchTrainings = () => {
         const url = customer + "/trainings";
-        fetch(url)
-            .then(res => res.json())
-            .then(data => { setTrainingsData(data.content); console.log(data.content) })
-            .catch(err => console.error(err))
-        if (trainingsData) {
-            // console.log(id);
-            // console.log(trainingsData);
-        }
-        
-        // console.log(name.firstname + name.lastname)
+        dataFetcher(url, setTrainingsData);
     }
 
-    const defaultColDef = {
-        sortable: false,
-        filter: false,
-        flex: 1
-    }
-
+    /** AG grid sarakemäärittelyt */
     const columns = [
         { field: 'date' },
         { field: 'activity' },
@@ -74,11 +53,11 @@ export default function TrainingsList(props) {
 
     return (
         <Fragment>
-            <Button onClick={ getTrainings } size='small'>Trainings</Button>
-            <Dialog 
-                open={open} 
-                onClose={ closeDialog } 
-                fullScreen 
+            <Button onClick={getTrainings} size='small'>Trainings</Button>
+            <Dialog
+                open={open}
+                onClose={closeDialog}
+                fullScreen
                 PaperProps={{
                     style: {
                         backgroundColor: '#1e1f26',
@@ -86,18 +65,18 @@ export default function TrainingsList(props) {
                 }}>
                 <DialogTitle style={{ textAlign: 'center', color: 'white' }}>Trainings of {fn} {ln} </DialogTitle>
                 <DialogActions style={{ justifyContent: 'center' }}>
-                    <Button onClick={ closeDialog }>Back to customers list</Button>
+                    <Button onClick={closeDialog}>Back to customers list</Button>
                 </DialogActions>
-                <AddTraining customer={ customer } fetchTrainings={ fetchTrainings } />
-                <TrainingsChart data={ trainingsData } />
+                <AddTraining customer={customer} fetchTrainings={fetchTrainings} />
+                <TrainingsChart data={trainingsData} />
                 <DialogContent >
                     <div className="ag-theme-alpine" style={{ height: 400, width: '100%', margin: 'auto' }}>
                         <AgGridReact
-                            rowData={ trainingsData }
-                            columnDefs={ columns }
-                            defaultColDef={ defaultColDef }
+                            rowData={trainingsData}
+                            columnDefs={columns}
+                            defaultColDef={defaultColDef}
                         />
-                    </div>                  
+                    </div>
                 </DialogContent>
             </Dialog>
         </Fragment>
