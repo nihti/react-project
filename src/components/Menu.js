@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import CustomersList from './customer/CustomersList';
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import TrainingsCalendar from './training/TrainingsCalendar';

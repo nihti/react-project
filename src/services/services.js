@@ -12,9 +12,9 @@ export const reset = () => {
     })
     .then(resp => {
         if (resp.ok) {
-            alert('Kanta nollattu');
+            alert('Database resetted');
         } else {
-            alert('Jokin meni vikaan')
+            alert('Something went wrong')
         }
     })
     .catch(err => console.error(err));

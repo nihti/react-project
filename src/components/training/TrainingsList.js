@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Fragment } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -11,10 +11,19 @@ import DialogTitle from '@mui/material/DialogTitle';
 import AddTraining from './AddTraining';
 import RemoveTraining from './RemoveTraining';
 import TrainingsChart from './TrainingsChart';
+import { dataFetcher } from '../../services/services';
 
 export default function TrainingsList(props) {
     const [trainingsData, setTrainingsData] = useState([]);
     const [open, setOpen] = useState(false);
+    // const [name, setName] = useState();
+
+    // useEffect(() => { dataFetcher(customer, setName) }, []);
+
+    console.log(props)
+
+    const fn = props.trainings.data.firstname;
+    const ln = props.trainings.data.lastname;
 
     const customer = props.trainings.value;
     // Käyttäjäid
@@ -36,9 +45,11 @@ export default function TrainingsList(props) {
             .then(data => { setTrainingsData(data.content); console.log(data.content) })
             .catch(err => console.error(err))
         if (trainingsData) {
-            console.log(id);
-            console.log(trainingsData);
+            // console.log(id);
+            // console.log(trainingsData);
         }
+        
+        // console.log(name.firstname + name.lastname)
     }
 
     const defaultColDef = {
@@ -64,9 +75,19 @@ export default function TrainingsList(props) {
     return (
         <Fragment>
             <Button onClick={ getTrainings } size='small'>Trainings</Button>
-            <Dialog open={open} onClose={ closeDialog } fullScreen >
-                <DialogTitle style={{ textAlign: 'center' }}>Trainings of user id {id} </DialogTitle>
-                <a style={{ textAlign: 'center' }} href="/customers">Back to customers list</a>
+            <Dialog 
+                open={open} 
+                onClose={ closeDialog } 
+                fullScreen 
+                PaperProps={{
+                    style: {
+                        backgroundColor: '#1e1f26',
+                    },
+                }}>
+                <DialogTitle style={{ textAlign: 'center', color: 'white' }}>Trainings of {fn} {ln} </DialogTitle>
+                <DialogActions style={{ justifyContent: 'center' }}>
+                    <Button onClick={ closeDialog }>Back to customers list</Button>
+                </DialogActions>
                 <AddTraining customer={ customer } fetchTrainings={ fetchTrainings } />
                 <TrainingsChart data={ trainingsData } />
                 <DialogContent >
@@ -78,9 +99,6 @@ export default function TrainingsList(props) {
                         />
                     </div>                  
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={ closeDialog }></Button>
-                </DialogActions>
             </Dialog>
         </Fragment>
     );

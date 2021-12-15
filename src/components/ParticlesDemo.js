@@ -1,11 +1,7 @@
-import React, { useRef } from "react";
+import React from "react";
 import Particles from "react-tsparticles";
-import { Button } from '@mui/material';
-import { Fragment } from 'react';
 
 export default function ParticlesDemo() {
-
-
   // https://github.com/matteobruni/react-tsparticles 
   const particlesInit = (main) => {
     // console.log(main);

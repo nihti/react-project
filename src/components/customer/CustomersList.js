@@ -73,9 +73,9 @@ export default function CustomersList() {
 
     return (
         <Fragment>
-            <AddCustomer setCustomers={setCustomers} />
-            <Button onClick={() => onBtnExport()} size='small'> CSV customers</Button>
             <div className="ag-theme-alpine" style={{ height: 600, width: '100%', margin: 'auto', paddingTop: '80px'}}>
+                <AddCustomer setCustomers={setCustomers} />
+                <Button onClick={() => onBtnExport()} size='small'> CSV customers</Button>
                 <AgGridReact 
                     rowData={customers}
                     columnDefs={columns}

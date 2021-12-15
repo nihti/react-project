@@ -63,14 +63,13 @@ export default function AddTraining(props) {
                 <DialogTitle>New training</DialogTitle>
                 <DialogContent>
                     <DateTimePicker 
-                        label="DateTimePicker"
+                        label=""
                         type="date"
                         name="date"
                         value={training.date}
                         onChange={date => setTraining({...training, date: date})}
                         renderInput={ (params) => <TextField {...params} /> }
                     />
-                    
                     <TextField
                         name="activity"
                         value={training.activity}

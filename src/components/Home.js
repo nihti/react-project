@@ -15,24 +15,20 @@ export default function Home() {
         <Fragment>
             <ParticlesDemo />
             <div className='home'>
-                <p>.</p>
-                <p>.</p>
-                <p>.</p>
-                <p>.</p>
-                <p>.</p>
-                <h1>REACT FINAL PROJECT</h1>
+                <br/>
+                <br/>
+                <h1>FRONTEND COURSE HAAGA-HELIA</h1>
+                <br/>
+                <br/>
                 <h3 className="span">
-                    FRONTEND COURSE HAAGA-HELIA
+                    REACT FINAL PROJECT
                 </h3>
-                <p>Workout application</p>
-                <p>.</p>
-                <p>.</p>
-                <p>.</p>
-                <p>.</p>
-                <p>.</p>
+                <h3>Workout application</h3>
+                <br/>
+                <br/>
+                <Button onClick={reset} color="error"> RESET THE EXERCISE </Button>
                 <p>(resets the customer & training info - doesn't do anything to the background animation)</p>
 
-                <Button onClick={reset} color="error"> RESET THE EXERCISE </Button>
             </div>
         </Fragment>
     )

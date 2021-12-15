@@ -19,6 +19,10 @@
     padding-top: 10%;
   }
 
+  .home h3 {
+      background-color: chocolate;
+  }
+
 
   .menu-container {
     padding-top: 5%;
