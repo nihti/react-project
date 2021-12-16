@@ -76,13 +76,16 @@ export default function CustomersList() {
             <div className="ag-theme-alpine" style={{ height: 600, width: '100%', margin: 'auto', paddingTop: '80px'}}>
                 <AddCustomer setCustomers={setCustomers} />
                 <Button onClick={() => onBtnExport()} size='small'> CSV customers</Button>
-                <AgGridReact 
-                    rowData={customers}
-                    columnDefs={columns}
-                    defaultColDef={defaultColDef}
-                    onGridReady={onGridReady}
-                    domLayout='autoHeight'
-                />
+                { customers ?
+                    <AgGridReact 
+                        rowData={customers}
+                        columnDefs={columns}
+                        defaultColDef={defaultColDef}
+                        onGridReady={onGridReady}
+                        domLayout='autoHeight'
+                    />
+                : <p>Loading...</p>
+                }
             </div>
             <Snackbar 
                 open={open}
