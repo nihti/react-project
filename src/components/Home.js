@@ -50,6 +50,8 @@ export default function Home() {
                 <br/>
                 <AlertDialog alertProps={ alertProps } />
                 <p>(resets the customer & training info - doesn't do anything to the background animation)</p>
+                <br/>
+                <a href="https://github.com/nihti/react-project" target="_blank">Project in GitHub</a>
             </div>
         </Fragment>
     )
