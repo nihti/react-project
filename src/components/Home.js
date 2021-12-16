@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
-import { reset } from '../services/services';
-import { Button } from '@mui/material';
+import AlertDialog from '../services/alert';
 import ParticlesDemo from './ParticlesDemo';
 
 /**  
@@ -8,6 +7,32 @@ import ParticlesDemo from './ParticlesDemo';
  */
 
 export default function Home() {
+    /**
+     * AlertDialogille passattavat propsit.
+     * Käytössä vain täällä Home-komponentissa, 
+     * mutta ratkaisu rakennettu skaalautuvuutta silmälläpitäen 
+     * (myöhässä, ei skaalautuvien raktaisujen rinnalle)
+     */
+    const alertProps = {
+        size: "medium",
+        buttonText: "Reset the exercise",
+        title: "Are you sure you want to reset the database?",
+        dialogText: "This deletes all the current changes to the customers and trainings. Action cannot be undone.",
+        action: () => {
+            fetch('http://customerrest.herokuapp.com/reset', {
+                method: 'POST'
+            })
+                .then(resp => {
+                    if (resp.ok) {
+                        alert('Database resetted');
+                    } else {
+                        alert('Something went wrong')
+                    }
+                })
+                .catch(err => console.error(err));
+        }
+    }
+
     return (
         <Fragment>
             <ParticlesDemo />
@@ -23,9 +48,8 @@ export default function Home() {
                 <h3>Workout application</h3>
                 <br/>
                 <br/>
-                <Button onClick={reset} color="error"> RESET THE EXERCISE </Button>
+                <AlertDialog alertProps={ alertProps } />
                 <p>(resets the customer & training info - doesn't do anything to the background animation)</p>
-
             </div>
         </Fragment>
     )

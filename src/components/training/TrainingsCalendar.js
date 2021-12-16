@@ -19,7 +19,7 @@ export default function TrainingsCalendar() {
     let events = [];
     const url = 'https://customerrest.herokuapp.com/api/trainings';
 
-    console.log(trainings);
+    // console.log(trainings);
 
     /** 
      * Paras vaihtoehto olisi asettaa data oikeassa muodossa heti stateen
@@ -32,6 +32,7 @@ export default function TrainingsCalendar() {
     events = trainings.map((train) => 
     // Täällä asetetaan yksittäisen eventin data 
         ([...events], {
+            
             id: train.links[0].href.split("https://customerrest.herokuapp.com/api/trainings/")[1],
             title: train.activity,
             /** 
@@ -39,6 +40,17 @@ export default function TrainingsCalendar() {
              * https://stackoverflow.com/questions/39735724/how-to-parse-iso-8601-into-date-and-time-format-using-moment-js-in-javascript/39736368#39736368
              */
             start: moment(train.date).utc().format('YYYY-MM-DDTHH:mm:ss'),
+            /**
+             * Kovasta yrityksestä huolimatta event default end ajankohdan muuttaminen ei onnistunut
+             * En osannut debugata tätä, esim. console.logittaa train.durationia
+             * ... 
+             * end: moment(train.date).add(moment.duration(train.duration)).utc().format('YYYY-MM-DDTHH:mm:ss'),
+             * slotDuration: moment(train.duration).utc().format('HH:mm:ss'),
+             * forceEventDuration: true,
+             * allDay: false,
+             * displayEventTime: true,
+             * displayEventEnd: true,
+             */
             extendedProps: {
               customer: train.links[0].href+'/customer',
               duration: train.duration
@@ -64,6 +76,7 @@ export default function TrainingsCalendar() {
         <div className='calendar-container' style={{ paddingTop: '80px' }}>
             <p> Click event to see the customer & duration </p>
             <br/>
+            { trainings ? 
             <FullCalendar
                 // https://levelup.gitconnected.com/create-a-month-week-and-day-view-calendar-with-react-and-fullcalendar-1794d76e6d06
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -75,6 +88,7 @@ export default function TrainingsCalendar() {
                 height="auto"
                 eventClick={eventClick}
             /> 
+            : <p> Loading... </p> }
         </div>
     );
 }
